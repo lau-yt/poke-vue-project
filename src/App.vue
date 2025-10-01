@@ -5,7 +5,8 @@ import DetailsTeamPoke from './components/DetailsTeamPoke.vue'
 </script>
 
 <template>
-    <h1 class="text-2xl font-bold text-center">Tu equipo pokemon</h1>
+    <h1 class="text-4xl font-bold text-center">Mi PokeTeam</h1>
+    <h2 class="text-xl text-center p-4">Descubre y elige tus Pokémon favoritos 🔴</h2>
     <MyTeamPokemon />
     <SearchPokemon />
     <DetailsTeamPoke />

@@ -5,16 +5,18 @@ const team = useTeamStore()
 </script>
 
 <template>
-  <div class="mt-10 mb-4">
+  <div class="mt-10 mb-4 border border-white p-8 rounded-3xl mx-4">
+
+    <h2 class="text-xl text-left mb-4">Tu equipo Pokémon: {{ team.team.length }} de 6</h2>
 
     <div v-if="team.team.length === 0" class="text-center">
-      Todavia no tienes pokemons en tu equipo
+      Todavia no tienes pokemons en tu equipo.
     </div>
 
-    <div v-else class="grid grid-cols-6 gap-4 mx-2 justify-center items-center flex">
+    <div v-else class="grid grid-cols-6 justify-center">
       <img
         v-for="poke in team.team"
-        class="mt-4 rounded-full border border-amber-100 bg-yellow-50 p-2 shadow-lg w-32 h-auto"
+        class="rounded-full border border-amber-100 bg-yellow-50 p-2 shadow-lg w-32 h-auto"
         :src="poke.image"
         :alt="poke.name"
       />

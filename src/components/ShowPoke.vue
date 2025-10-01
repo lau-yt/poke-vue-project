@@ -9,15 +9,22 @@ defineProps<{
 }>()
 
 const teamStore = useTeamStore()
+
+function toUpperCase(namePkm: String) {
+  return namePkm.charAt(0).toUpperCase() + namePkm.slice(1)
+}
+
 </script>
+
 
 <template>
   <section>
     <div v-if="isLoading">Cargando...</div>
     <div v-else>
-      <h1 class="text-xl font-bold text-left">{{ pokemon.name }}</h1>
-      <p class="text-left">{{ pokemon.order }}</p>
-      <img class="mt-4 mx-auto block" :src="pokemon.image" :alt="pokemon.name" />
+      <h1 class="text-xl font-bold text-left">{{ toUpperCase(pokemon.name) }}</h1>
+      <p class="text-left"> #{{ pokemon.order }}</p>  
+
+      <img class="mt-4 mx-auto block w-40 h-40 rounded-full object-contain p-2 bg-white shadow-lg" :src="pokemon.image" :alt="pokemon.name" />
       <ul class="mt-4 flex justify-center gap-2">
         <img
           v-for="type in pokemon.types"
@@ -27,8 +34,10 @@ const teamStore = useTeamStore()
           class="w-16 h-auto"
         />
       </ul>
-      <p><strong>Altura:</strong> {{ pokemon.height }}</p>
-      <p><strong>Peso:</strong> {{ pokemon.weight }}</p>
+      <div class="grid grid-cols-2 gap-2 mt-4 md:grid-cols-1 lg:grid-cols-2 ">
+        <p class="bg-white p-4 md:p-2"><strong>Altura </strong> {{ pokemon.height }}m</p>
+        <p class="bg-white p-4 md:p-2"><strong>Peso </strong> {{ pokemon.weight }}kg</p>
+      </div>
       <div class="flex justify-center gap-2">
         <button
           v-if="!inTeam"

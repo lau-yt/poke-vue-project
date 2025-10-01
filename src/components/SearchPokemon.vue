@@ -18,8 +18,8 @@ const inTeam = computed(() => {
 </script>
 
 <template>
-  <nav class="p-10 flex justify-center border border-pink-400">
-    <form @submit.prevent="onSearch">
+  <nav class="p-10 flex justify-center border border-white rounded-3xl mx-4">
+    <form @submit.prevent="onSearch" class="flex">
       <input
         class="px-72 py-2 rounded-2xl border border-gray-40 bg-white"
         v-model="query"
