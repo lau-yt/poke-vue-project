@@ -1,4 +1,6 @@
 <script setup>
+
+//NO UTILIZADO, vino de base para empezar y aprender
 import { ref, onMounted } from 'vue'
 
 const pokemon = ref(null)
@@ -7,8 +9,6 @@ async function fetchPokemon(name) {
   try {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
     const data = await res.json()
-
-    console.log(data)
 
     pokemon.value = {
       name: data.name,
