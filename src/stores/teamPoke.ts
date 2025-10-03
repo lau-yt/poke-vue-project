@@ -17,7 +17,6 @@ export const useTeamStore = defineStore('team', () => {
   }
 
   function inTeam(pokemon: Pokemon) {
-    console.log('result is: ', computed(() => team.value.some((p) => p.id === pokemon.id)).value)
     return computed(() => team.value.some((p) => p.id === pokemon.id)).value
   }
 

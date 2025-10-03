@@ -5,7 +5,6 @@ import { useNotification } from '@/composables/useNotification'
 
 defineProps<{
   pokemon: Pokemon
-  isLoading?: boolean
   inTeam?: boolean
 }>()
 
@@ -19,18 +18,18 @@ function toUpperCase(namePkm: String) {
 function onAdd(pokemon: Pokemon) {
   try {
     teamStore.addMyTeam(pokemon)
-    success('Pokemon añadido al equipo')
+    success('Pokemon añadido al equipo 🐾')
   } catch (e: any) {
-    error(e?.message ?? 'No se pudo añadir al equipo')
+    error(e?.message ?? 'No se pudo añadir al equipo 🐾')
   }
 }
 
 function onRemove(pokemon: Pokemon) {
   try {
     teamStore.removeFromTeam(pokemon)
-    success('Pokemon eliminado del equipo')
+    success('Pokemon eliminado del equipo 🗑️')
   } catch (e: any) {
-    error(e?.message ?? 'No se pudo eliminar del equipo')
+    error(e?.message ?? 'No se pudo eliminar del equipo 🗑️')
   }
 }
 
@@ -39,8 +38,6 @@ function onRemove(pokemon: Pokemon) {
 
 <template>
   <section>
-    <div v-if="isLoading">Cargando...</div>
-    <div v-else>
       <h1 class="text-xl font-bold text-left">{{ toUpperCase(pokemon.name) }}</h1>
       <p class="text-left"> #{{ pokemon.order }}</p>  
 
@@ -74,7 +71,6 @@ function onRemove(pokemon: Pokemon) {
           Quitar de mi equipo
         </button>
       </div>
-    </div>
   </section>
 </template>
 
