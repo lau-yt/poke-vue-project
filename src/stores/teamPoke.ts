@@ -7,7 +7,7 @@ export const useTeamStore = defineStore('team', () => {
 
   function addMyTeam(pokemon: Pokemon) {
     if (team.value.length > 5) {
-      throw new Error('El equipo esta lleno')
+      throw new Error('Ups, el equipo esta lleno')
     }
     team.value.push(pokemon)
   }

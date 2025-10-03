@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Pokemon } from '@/composables/usePokemonSearch'
 import { useTeamStore } from '@/stores/teamPoke'
+import { useNotification } from '@/composables/useNotification'
 
 defineProps<{
   pokemon: Pokemon
@@ -9,9 +10,28 @@ defineProps<{
 }>()
 
 const teamStore = useTeamStore()
+const { success, error } = useNotification()
 
 function toUpperCase(namePkm: String) {
   return namePkm.charAt(0).toUpperCase() + namePkm.slice(1)
+}
+
+function onAdd(pokemon: Pokemon) {
+  try {
+    teamStore.addMyTeam(pokemon)
+    success('Pokemon añadido al equipo')
+  } catch (e: any) {
+    error(e?.message ?? 'No se pudo añadir al equipo')
+  }
+}
+
+function onRemove(pokemon: Pokemon) {
+  try {
+    teamStore.removeFromTeam(pokemon)
+    success('Pokemon eliminado del equipo')
+  } catch (e: any) {
+    error(e?.message ?? 'No se pudo eliminar del equipo')
+  }
 }
 
 </script>
@@ -41,14 +61,14 @@ function toUpperCase(namePkm: String) {
       <div class="flex justify-center gap-2">
         <button
           v-if="!inTeam"
-          @click="teamStore.addMyTeam(pokemon)"
+          @click="onAdd(pokemon)"
           class="mt-4 bg-green-500 text-white p-2 rounded-2xl hover:bg-green-600 text-center"
         >
           Añadir a mi equipo
         </button>
         <button
           v-else
-          @click="teamStore.removeFromTeam(pokemon)"
+          @click="onRemove(pokemon)"
           class="mt-4 bg-red-500 text-white p-2 rounded-2xl hover:bg-red-600 text-center"
         >
           Quitar de mi equipo
