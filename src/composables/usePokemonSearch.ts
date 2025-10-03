@@ -58,15 +58,19 @@ export function usePokemonSearch() {
   const loading = ref<boolean | null>(null)
   const error = ref<string | null>(null)
   const pokemon = ref<Pokemon | null>(null)
+  const status = ref<'' | 'success' | 'error'>('')
 
   async function fetchPokemon(name: string) {
     const n = name.trim().toLowerCase()
     if (!n) {
       pokemon.value = null
       error.value = null
+      loading.value = false
+      status.value = ''
       return
     }
 
+    error.value = null
     loading.value = true
 
     try {
@@ -75,6 +79,7 @@ export function usePokemonSearch() {
         if (res.status === 404) {
           pokemon.value = null
           error.value = 'Pokemon no encontrado'
+          status.value = 'error'
           return
         }
         throw new Error('HTTP' + res.status)
@@ -103,9 +108,10 @@ export function usePokemonSearch() {
         order: data.order,
         types,
       }
+      status.value = 'success'
     } catch (e) {
-      console.log(e)
       error.value = 'Tuvimos problemas con la consulta'
+      status.value = 'error'
     } finally {
       loading.value = false
     }
@@ -117,5 +123,12 @@ export function usePokemonSearch() {
     }
   }
 
-  return { query, loading, error, pokemon, onSearch }
+  function clearError() {
+    error.value = null
+    if (status.value === 'error') {
+      status.value = ''
+    }
+  }
+
+  return { query, loading, error, status, pokemon, onSearch, clearError }
 }
